@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META SECTION -->
+    <title>Tester matcher</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row">
+    <div class="text-primary col-md-offset-1">
+        <p>Welcome in Tester Matcher. You can search testers by countries or devices.</p>
+        <p>Example search:</p>
+        <p>countries=GB,JP</p>
+        <p>devices=iPhone 4</p>
+        <p>You can also use ALL option:</p>
+        <p>countries=ALL</p>
+        <p>devices=ALL</p>
+    </div>
+</div>
+<div class="row">
+    <form class="col-md-offset-1" action="#" th:action="@{/}">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Search by countries:</label>
+            </div>
+            <div class="col-md-4">
+                <label>Search by devices:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input th:value="${countries}" name="countries"
+                       id="countries" class="form-control"/>
+            </div>
+            <div class="col-md-4">
+                <input th:value="${devices}" name="devices" id="devices"
+                       class="form-control"/>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-sm btn-success" type="submit">Search</button>
+            </div>
+        </div>
+        <div class="row">
+            <div th:if="${not #lists.isEmpty(foundTesters)}" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4"><label>Search Results</label></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><label>User name</label></div>
+                    <div class="col-md-4"><label>Experience</label></div>
+                </div>
+                <div th:each="tester : ${foundTesters}" class="row">
+                    <div class="col-md-4" th:text="${tester.userName}"></div>
+                    <div class="col-md-4" th:text="${tester.experience}"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
